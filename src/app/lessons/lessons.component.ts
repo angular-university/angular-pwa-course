@@ -18,6 +18,11 @@ export class LessonsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadLessons();
+    }
+
+
+    loadLessons() {
         this.lessons$ = this.lessonsService.loadAllLessons().catch(err => Observable.of([]));
     }
 

@@ -4,17 +4,12 @@ import {LessonsComponent} from "./lessons/lessons.component";
 
 export const routesConfig: Routes = [
     {
-        path: 'lessons',
+        path: '',
         component: LessonsComponent
     },
     {
-        path: '',
-        redirectTo:'/lessons',
-        pathMatch: 'full'
-    },
-    {
         path: '**',
-        redirectTo: '/lessons',
+        redirectTo: '/',
         pathMatch: 'full'
     }
 ];
