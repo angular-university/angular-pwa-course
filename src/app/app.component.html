@@ -9,27 +9,15 @@
         <li>
             <a routerLink="/lessons">Lessons</a>
         </li>
-        <li *rbacAllow="['ADMIN']">
-            <a routerLink="/admin">Admin</a>
-        </li>
-        <li *ngIf="isLoggedOut$ | async">
-            <a routerLink="/signup">Sign Up</a>
-        </li>
-        <li *ngIf="isLoggedOut$ | async">
-            <a routerLink="/login">Login</a>
-        </li>
-        <li *ngIf="isLoggedIn$ | async" (click)="logout()">
-            <a>Logout</a>
-        </li>
     </ul>
 </header>
 
 <main>
 
     <div class="course-header">
-        <h3>Angular Security MasterClass</h3>
-        <img class="course-logo"
-             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-security-thumbnail.png">
+        <h3>Angular PWA Course</h3>
+        <img class="course-logo pwa-logo"
+             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-pwa-course.png">
 
         <ng-container *ngIf="(user$ | async) as user">
 
