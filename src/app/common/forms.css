@@ -1,0 +1,26 @@
+
+form {
+    width: 300px;
+}
+
+form label {
+    width: 80px;
+    text-align: right;
+}
+
+form input {
+    border: 2px solid lightgray;
+}
+
+.form-field {
+    margin-bottom: 5px;
+}
+
+.form-buttons {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.form-buttons button{
+    width: 100%;
+}

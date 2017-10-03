@@ -1,0 +1,49 @@
+<header class="l-header">
+    <ul class="top-menu disable-link-styles">
+        <li class="logo-small-container">
+            <a class="v-center-block-parent">
+                <img class="v-center-block logo-small angular-university-logo"
+                     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+            </a>
+        </li>
+        <li>
+            <a routerLink="/lessons">Lessons</a>
+        </li>
+        <li *rbacAllow="['ADMIN']">
+            <a routerLink="/admin">Admin</a>
+        </li>
+        <li *ngIf="isLoggedOut$ | async">
+            <a routerLink="/signup">Sign Up</a>
+        </li>
+        <li *ngIf="isLoggedOut$ | async">
+            <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="isLoggedIn$ | async" (click)="logout()">
+            <a>Logout</a>
+        </li>
+    </ul>
+</header>
+
+<main>
+
+    <div class="course-header">
+        <h3>Angular Security MasterClass</h3>
+        <img class="course-logo"
+             src="https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-security-thumbnail.png">
+
+        <ng-container *ngIf="(user$ | async) as user">
+
+            <h4 class="user-email" *ngIf="user.email">{{user.email}}</h4>
+
+        </ng-container>
+
+    </div>
+
+    <router-outlet></router-outlet>
+
+</main>
+
+
+
+
+

@@ -1,0 +1,18 @@
+
+<div class="lessons-list-container v-h-center-block-parent" *ngIf="isLoggedIn$ | async">
+
+    <h2>All Lessons</h2>
+
+    <table class="table lessons-list card card-strong">
+        <tbody>
+        <tr *ngFor="let lesson of lessons$ | async" [routerLink]="['/lessons', lesson.id]">
+            <td class="lesson-title"> {{lesson.description}} </td>
+            <td class="duration">
+                <i class="md-icon duration-icon">access_time</i>
+                <span>{{lesson.duration}}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

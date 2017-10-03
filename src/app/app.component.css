@@ -1,0 +1,27 @@
+
+
+.l-header {
+    display: block;
+}
+
+main {
+    padding-top: 50px;
+    margin: 0 auto;
+    width: 300px;
+}
+
+.course-header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.course-header h3 {
+    text-align: center;
+}
+
+
+.user-email {
+    color: blue;
+    text-decoration: underline;
+}

@@ -1,0 +1,37 @@
+
+<div class="messages messages-error" *ngIf="errors?.length">
+    <div class="messages-container">
+        <div *ngFor="let error of errors">{{messagePerErrorCode[error]}}</div>
+    </div>
+</div>
+
+
+
+<form autocomplete="off" novalidate  [formGroup]="form">
+
+    <fieldset>
+        <legend>Sign Up</legend>
+
+        <div class="form-field">
+            <label>Email:</label>
+            <input name="email" formControlName="email">
+        </div>
+        <div class="form-field">
+            <label>Password:</label>
+            <input name="password" formControlName="password" type="password">
+        </div>
+        <div class="form-field">
+            <label>Confirm:</label>
+            <input name="confirm" formControlName="confirm" type="password">
+        </div>
+    </fieldset>
+
+    <div class="form-buttons">
+
+        <button  class="button button-primary" (click)="signUp()">Sign Up</button>
+
+    </div>
+
+
+
+</form>
