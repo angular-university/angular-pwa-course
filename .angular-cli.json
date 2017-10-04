@@ -13,8 +13,7 @@
         "manifest.json",
         "sw-register.js",
         "sw.js",
-        "offline.html",
-        "sw-simple.js"
+        "offline.html"
       ],
       "index": "index.html",
       "main": "main.ts",
