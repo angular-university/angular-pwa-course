@@ -1,21 +1,25 @@
 
 
-const VERSION = 'v6';
-
-
-// Install stage sets up the offline page in the cahche and opens a new cache
-self.addEventListener('install', event => event.waitUntil(installOfflinePage()));
-
+const VERSION = 'v14';
 
 function getCacheName() {
-    return "app-page" + VERSION;
+    return "app-cache-" + VERSION;
+}
+
+function log(messages) {
+    console.log(VERSION, messages);
 }
 
 
+// Install stage sets up the offline page in the cahche and opens a new cache
+self.addEventListener('install', event => event.waitUntil(installServiceWorker()));
 
-async function installOfflinePage() {
 
-    console.log("Service Worker installation ongoing " + VERSION);
+
+
+async function installServiceWorker() {
+
+    log("Service Worker installation ongoing ");
 
     self.skipWaiting();
 
@@ -23,7 +27,7 @@ async function installOfflinePage() {
 
     const response = await fetch(request);
 
-    console.log("response received after loading offline.html", response);
+    log("response received after loading offline.html", response);
 
     if (response.status !== 200) {
         throw new Error('Could not load offline page!');
@@ -31,14 +35,23 @@ async function installOfflinePage() {
 
     const cache = await caches.open(getCacheName());
 
-    console.log("Caching offline.html");
     cache.put(request, response.clone());
+    log("Cached offline.html");
 
-    //TODO try these APIs
-    // or cache.addAll(['/url'])  |  cache.add('url')
-
-    console.log('Cached offline page: '+ response.url);
+    return cache.addAll([
+        '/',
+        '/polyfills.bundle.js',
+        '/inline.bundle.js',
+        '/styles.bundle.js',
+        '/vendor.bundle.js',
+        '/main.bundle.js',
+        '/assets/bundle.css',
+        //'/api/lessons',
+        '/assets/angular-pwa-course.png'
+    ]);
 }
+
+
 
 
 
@@ -55,7 +68,7 @@ async function activateServiceWorker(event) {
         }
     });
 
-    console.log("Service Worker Activated, cache ready " +  VERSION);
+    log("Service Worker Activated, cache ready ");
     return clients.claim();
 }
 
@@ -64,20 +77,42 @@ async function activateServiceWorker(event) {
 
 
 // Detect failing HTTP requests, show the offline page instead
-self.addEventListener('fetch', event => event.respondWith(fallbackToOffline(event)));
+self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event)));
 
 
-async function fallbackToOffline(event) {
+
+async function cacheThenNetwork(event) {
+
+    const cache = await caches.open(getCacheName());
+
+    const cachedResponse = await cache.match(event.request);
+
+    if (cachedResponse) {
+        log('From Cache: ' + event.request.url);
+        return cachedResponse;
+    }
+
+    const networkResponse = await fetch(event.request);
+
+    log('Calling network: ' + event.request.url);
+
+    return networkResponse;
+}
+
+
+
+
+async function showOffLinePage(event) {
 
     let response;
 
     try {
         response = await fetch(event.request);
-        console.log('Calling network: ' + VERSION + ' ' + event.request.url);
+        log('Calling network: '+ event.request.url);
     }
     catch(error) {
 
-        console.log( 'Network request Failed. Serving offline page ' + error );
+        log( 'Network request Failed. Serving offline page ', error );
 
         const cache = await caches.open(getCacheName());
 
