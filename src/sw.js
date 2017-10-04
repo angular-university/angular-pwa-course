@@ -1,6 +1,6 @@
 
 
-const VERSION = 'v14';
+const VERSION = 'v16';
 
 function getCacheName() {
     return "app-cache-" + VERSION;
@@ -46,8 +46,9 @@ async function installServiceWorker() {
         '/vendor.bundle.js',
         '/main.bundle.js',
         '/assets/bundle.css',
-        //'/api/lessons',
-        '/assets/angular-pwa-course.png'
+        '/api/lessons',
+        '/assets/angular-pwa-course.png',
+        '/assets/main-page-logo-small-hat.png'
     ]);
 }
 
