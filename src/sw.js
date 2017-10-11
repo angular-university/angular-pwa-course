@@ -1,5 +1,5 @@
 
-const VERSION = 'v7';
+const VERSION = 'v8';
 
 
 log('Installing Service Worker');
@@ -42,10 +42,27 @@ self.addEventListener('fetch', event => event.respondWith(showOfflineIfError(eve
 
 async function showOfflineIfError(event) {
 
-    log('Calling network: ' + event.request.url);
 
+    let response;
 
-    return fetch(event.request);
+    try {
+
+         log('Calling network: ' + event.request.url);
+
+         response = await fetch(event.request);
+
+    }
+    catch(err) {
+
+        log( 'Network request Failed. Serving offline page ', err );
+
+        const cache = await caches.open('app-cache');
+
+        response = cache.match("offline.html");
+
+    }
+
+    return response;
 }
 
 
