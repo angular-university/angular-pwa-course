@@ -7,6 +7,20 @@ log('Installing Service Worker');
 
 self.addEventListener('install', event => event.waitUntil(installServiceWorker()));
 
+/*
+
+    These are the files that we want to download and install on the background
+
+        '/',
+        '/polyfills.bundle.js',
+        '/inline.bundle.js',
+        '/styles.bundle.js',
+        '/vendor.bundle.js',
+        '/main.bundle.js',
+        '/assets/bundle.css',
+        '/assets/angular-pwa-course.png',
+        '/assets/main-page-logo-small-hat.png'
+*/
 
 async function installServiceWorker() {
 
