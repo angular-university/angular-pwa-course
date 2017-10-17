@@ -1,5 +1,5 @@
 
-const VERSION = 'v14';
+const VERSION = 'v13';
 
 
 log('Installing Service Worker');
@@ -51,6 +51,8 @@ self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event
 
 
 async function cacheThenNetwork(event) {
+
+    log('Intercepting request: ' + event.request.url);
 
     const cache = await caches.open(getCacheName());
 
