@@ -45,7 +45,7 @@ function log(message, ...data) {
         console.log(VERSION, message, data);
     }
     else {
-        console.log(message);
+        console.log(VERSION, message);
     }
 }
 
