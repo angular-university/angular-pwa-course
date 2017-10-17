@@ -1,5 +1,5 @@
 
-const VERSION = 'v13';
+const VERSION = 'v14';
 
 
 log('Installing Service Worker');
@@ -83,7 +83,7 @@ function log(message, ...data) {
         console.log(VERSION, message, data);
     }
     else {
-        console.log(message);
+        console.log(VERSION, message);
     }
 }
 
