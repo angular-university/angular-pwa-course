@@ -1,5 +1,5 @@
 
-const VERSION = 'v14';
+const VERSION = 'v17';
 
 
 log('Installing Service Worker');
@@ -13,6 +13,8 @@ async function installServiceWorker() {
     log("Service Worker installation started ");
 
     const cache = await caches.open(getCacheName());
+
+    self.skipWaiting();
 
     return cache.addAll([
         '/',
