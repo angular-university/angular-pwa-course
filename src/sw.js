@@ -43,6 +43,7 @@ async function activateSW() {
         }
     });
 
+    return clients.claim();
 }
 
 
