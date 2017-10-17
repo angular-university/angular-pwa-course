@@ -1,5 +1,5 @@
 
-const VERSION = 'v13';
+const VERSION = 'v14';
 
 
 log('Installing Service Worker');
