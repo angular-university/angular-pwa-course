@@ -19,7 +19,6 @@
 
     function promisifyRequestCall(obj, method, args) {
         var request;
-        console.log("promisifyRequestCall()", obj, method, args);
         var p = new Promise(function(resolve, reject) {
             request = obj[method].apply(obj, args);
             promisifyRequest(request).then(resolve, reject);
