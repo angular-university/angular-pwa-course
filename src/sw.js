@@ -1,6 +1,6 @@
 const VERSION = 'v20';
 
-importScripts("assets/idb.js");
+importScripts("/assets/idb.js");
 
 log('Installing Service Worker');
 
@@ -10,7 +10,7 @@ self.addEventListener('install', event => event.waitUntil(installServiceWorker()
 
 async function installServiceWorker() {
 
-    log("Service Worker installation started ");
+    log("Starting Service Worker");
 
     const cache = await caches.open(getCacheName());
 
@@ -37,7 +37,7 @@ let indexedDB;
 
 async function activateSW() {
 
-    log('Service Worker activated');
+    log('Activating Service Worker');
 
     const cacheKeys = await caches.keys();
 
@@ -47,11 +47,16 @@ async function activateSW() {
         }
     });
 
-    indexedDB = self.idb.open('coursesDB', 1, upgradeDB => {
+    await clients.claim();
+
+    log('Initializing IndexedDB');
+
+    indexedDB = idb.open('coursesDB', 1, upgradeDB => {
+
         upgradeDB.createObjectStore('lessonsStore');
     });
 
-    return Promise.all(db, clients.claim());
+    return indexedDB;
 }
 
 
@@ -59,6 +64,7 @@ self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event
 
 
 async function cacheThenNetwork(event) {
+    log("Intercepting network request ...");
     if (event.request.url.startsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }

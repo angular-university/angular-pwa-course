@@ -19,6 +19,7 @@
 
     function promisifyRequestCall(obj, method, args) {
         var request;
+        console.log("promisifyRequestCall()", obj, method, args);
         var p = new Promise(function(resolve, reject) {
             request = obj[method].apply(obj, args);
             promisifyRequest(request).then(resolve, reject);
@@ -283,7 +284,7 @@
 
     var exp = {
         open: function(name, version, upgradeCallback) {
-            var p = promisifyRequestCall(indexedDB, 'open', [name, version]);
+            var p = promisifyRequestCall(self.indexedDB, 'open', [name, version]);
             var request = p.request;
 
             request.onupgradeneeded = function(event) {
@@ -297,7 +298,7 @@
             });
         },
         delete: function(name) {
-            return promisifyRequestCall(indexedDB, 'deleteDatabase', [name]);
+            return promisifyRequestCall(self.indexedDB, 'deleteDatabase', [name]);
         }
     };
 
