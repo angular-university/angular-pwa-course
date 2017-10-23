@@ -49,9 +49,11 @@ async function activateSW() {
 
     await clients.claim();
 
-    log('Initializing IndexedDB');
+    log('Initializing IndexedDB...');
 
     indexedDB = idb.open('coursesDB', 1, upgradeDB => {
+
+        log('IndexedDB lessonsStore created...');
 
         upgradeDB.createObjectStore('lessonsStore');
     });
@@ -64,8 +66,8 @@ self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event
 
 
 async function cacheThenNetwork(event) {
-    log("Intercepting network request ...");
-    if (event.request.url.startsWith("/api/lessons")) {
+    log("Intercepting network request ", event.request.url);
+    if (event.request.url.endsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }
     else {
@@ -81,7 +83,7 @@ async function handleAPIRequest(event) {
 
         const response = await fetch(event.request);
 
-        log('API results from network: ' + event.request.url);
+        log('API results from network: ', response);
 
         await saveLessonsToIndexedDB(response);
 
@@ -113,7 +115,7 @@ async function readLessonsFromIndexedDB() {
 
     const db = await indexedDB;
 
-    const tx = db.transaction('lessonsStore', 'read');
+    const tx = db.transaction('lessonsStore', 'readonly');
 
     const lessons = await tx.objectStore('lessonsStore').get("lessons");
 
