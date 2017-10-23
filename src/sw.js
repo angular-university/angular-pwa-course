@@ -1,6 +1,6 @@
+const VERSION = 'v20';
 
-const VERSION = 'v17';
-
+importScripts("assets/idb.js");
 
 log('Installing Service Worker');
 
@@ -27,11 +27,13 @@ async function installServiceWorker() {
         '/assets/angular-pwa-course.png',
         '/assets/main-page-logo-small-hat.png'
     ]);
-
 }
+
 
 self.addEventListener('activate', () => activateSW());
 
+
+let indexedDB;
 
 async function activateSW() {
 
@@ -40,42 +42,94 @@ async function activateSW() {
     const cacheKeys = await caches.keys();
 
     cacheKeys.forEach(cacheKey => {
-        if (cacheKey !== getCacheName() ) {
+        if (cacheKey !== getCacheName()) {
             caches.delete(cacheKey);
         }
     });
 
-    return clients.claim();
+    indexedDB = self.idb.open('coursesDB', 1, upgradeDB => {
+        upgradeDB.createObjectStore('lessonsStore');
+    });
+
+    return Promise.all(db, clients.claim());
 }
 
 
 self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event)));
 
 
-
 async function cacheThenNetwork(event) {
+    if (event.request.url.startsWith("/api/lessons")) {
+        return handleAPIRequest(event);
+    }
+    else {
+        return handleResourceBundleRequest(event);
+    }
+}
 
-    log('Intercepting request: ' + event.request.url);
+
+async function handleAPIRequest(event) {
+    try {
+
+        log('API request, calling network: ' + event.request.url);
+
+        const response = await fetch(event.request);
+
+        log('API results from network: ' + event.request.url);
+
+        await saveLessonsToIndexedDB(response);
+
+        return response;
+    }
+    catch (error) {
+        return readLessonsFromIndexedDB();
+    }
+}
+
+async function saveLessonsToIndexedDB(response) {
+
+    const lessons = JSON.parse(response.body);
+
+    log('Saving lessons to Indexed DB: ' + lessons);
+
+    const db = await indexedDB;
+
+    const tx = db.transaction('lessonsStore', 'write');
+
+    tx.objectStore('lessonsStore').put("lessons", lessons);
+
+    return tx.complete;
+
+}
+
+
+async function readLessonsFromIndexedDB() {
+
+    const db = await indexedDB;
+
+    const tx = db.transaction('lessonsStore', 'read');
+
+    const lessons = await tx.objectStore('lessonsStore').get("lessons");
+
+    return new Response(lessons);
+}
+
+
+async function handleResourceBundleRequest(event) {
 
     const cache = await caches.open(getCacheName());
 
     const cachedResponse = await cache.match(event.request);
 
     if (cachedResponse) {
-        log('From Cache: ' + event.request.url);
+        log('served from Cache storage: ' + event.request.url);
         return cachedResponse;
     }
 
     const networkResponse = await fetch(event.request);
 
-    log('Calling network: ' + event.request.url);
-
     return networkResponse;
-
-
 }
-
-
 
 
 function getCacheName() {
