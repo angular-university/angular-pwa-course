@@ -1,4 +1,4 @@
-const VERSION = 'v18';
+const VERSION = 'v19';
 
 importScripts("/assets/idb.js");
 
@@ -69,9 +69,6 @@ self.addEventListener('fetch', event => event.respondWith(handleRequest(event)))
 
 
 async function handleRequest(event) {
-
-    console.log("Indexed DB",db);
-
     if (event.request.url.endsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }
@@ -88,12 +85,36 @@ async function handleAPIRequest(event) {
 
         const response = await fetch(event.request);
 
+        saveLessonsToIndexedDB(response.clone());
+
         return response;
     }
     catch (error) {
 
         console.error("API call failed", error);
+
+        return readLessonsFromIndexedDB();
     }
+}
+
+async function saveLessonsToIndexedDB(response) {
+
+    const json = await response.json();
+
+    log("API call successful, saving lessons in IndexedDB", json.lessons);
+
+    const tx = db.transaction('lessonsStore', 'readwrite');
+
+    json.lessons.forEach(lesson => tx.objectStore("lessonsStore").put( lesson));
+
+    return tx.complete;
+}
+
+
+
+
+async function readLessonsFromIndexedDB() {
+
 }
 
 
