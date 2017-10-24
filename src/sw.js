@@ -1,4 +1,4 @@
-const VERSION = 'v20';
+const VERSION = 'v22';
 
 importScripts("/assets/idb.js");
 
@@ -49,13 +49,17 @@ async function activateSW() {
 
     await clients.claim();
 
+    if (!('indexedDB' in self)) {
+        return null;
+    }
+
     log('Initializing IndexedDB...');
 
     indexedDB = idb.open('coursesDB', 1, upgradeDB => {
 
         log('IndexedDB lessonsStore created...');
 
-        upgradeDB.createObjectStore('lessonsStore');
+        upgradeDB.createObjectStore('lessonsStore', { keyPath: "id"});
     });
 
     return indexedDB;
@@ -66,7 +70,6 @@ self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event
 
 
 async function cacheThenNetwork(event) {
-    log("Intercepting network request ", event.request.url);
     if (event.request.url.endsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }
@@ -83,28 +86,29 @@ async function handleAPIRequest(event) {
 
         const response = await fetch(event.request);
 
-        log('API results from network: ', response);
-
-        await saveLessonsToIndexedDB(response);
+        await saveLessonsToIndexedDB(response.clone());
 
         return response;
     }
     catch (error) {
+
+        console.error("API call failed, reading from IndexedDB", error);
+
         return readLessonsFromIndexedDB();
     }
 }
 
 async function saveLessonsToIndexedDB(response) {
 
-    const lessons = JSON.parse(response.body);
-
-    log('Saving lessons to Indexed DB: ' + lessons);
+    const json = await response.json();
 
     const db = await indexedDB;
 
-    const tx = db.transaction('lessonsStore', 'write');
+    const tx = db.transaction('lessonsStore', 'readwrite');
 
-    tx.objectStore('lessonsStore').put("lessons", lessons);
+    log("API call successful, saving lessons in IndexedDB", json.lessons);
+
+    json.lessons.forEach(lesson => tx.objectStore('lessonsStore').put(lesson) );
 
     return tx.complete;
 
@@ -117,7 +121,7 @@ async function readLessonsFromIndexedDB() {
 
     const tx = db.transaction('lessonsStore', 'readonly');
 
-    const lessons = await tx.objectStore('lessonsStore').get("lessons");
+    const lessons = await tx.objectStore('lessonsStore').getAll();
 
     return new Response(lessons);
 }
