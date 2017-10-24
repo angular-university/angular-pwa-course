@@ -123,7 +123,7 @@ async function readLessonsFromIndexedDB() {
 
     const lessons = await tx.objectStore('lessonsStore').getAll();
 
-    return new Response(lessons);
+    return new Response(JSON.stringify({lessons}));
 }
 
 
