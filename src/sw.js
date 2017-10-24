@@ -1,6 +1,9 @@
 const VERSION = 'v18';
 
 
+importScripts("/assets/idb.js");
+
+
 log('Installing Service Worker');
 
 
@@ -50,10 +53,10 @@ async function activateSW() {
 }
 
 
-self.addEventListener('fetch', event => event.respondWith(cacheThenNetwork(event)));
+self.addEventListener('fetch', event => event.respondWith(handleRequest(event)));
 
 
-async function cacheThenNetwork(event) {
+async function handleRequest(event) {
     if (event.request.url.endsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }
