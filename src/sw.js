@@ -1,8 +1,6 @@
 const VERSION = 'v18';
 
-
 importScripts("/assets/idb.js");
-
 
 log('Installing Service Worker');
 
@@ -34,8 +32,7 @@ async function installServiceWorker() {
 
 self.addEventListener('activate', () => activateSW());
 
-
-
+let db;
 
 async function activateSW() {
 
@@ -49,7 +46,22 @@ async function activateSW() {
         }
     });
 
-    return clients.claim();
+    await clients.claim();
+
+    if (!('indexedDB' in self)) {
+        return null;
+    }
+
+    log('Initializing IndexedDB...');
+
+    db = await idb.open('coursesDB', 1, upgradeDB => {
+
+        log('IndexedDB lessonsStore created...');
+
+        upgradeDB.createObjectStore("lessonsStore", {keyPath: "id"});
+
+    });
+
 }
 
 
@@ -57,6 +69,9 @@ self.addEventListener('fetch', event => event.respondWith(handleRequest(event)))
 
 
 async function handleRequest(event) {
+
+    console.log("Indexed DB",db);
+
     if (event.request.url.endsWith("/api/lessons")) {
         return handleAPIRequest(event);
     }

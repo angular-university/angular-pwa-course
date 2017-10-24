@@ -20,14 +20,6 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
                 console.log('Service worker registration completed');
 
-                setInterval(() => {
-
-                    console.log('Updating Service Worker ...');
-                    registration.update();
-
-                }, 60000);
-
-
             });
         }
 
