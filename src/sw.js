@@ -1,6 +1,5 @@
-const VERSION = 'v22';
+const VERSION = 'v18';
 
-importScripts("/assets/idb.js");
 
 log('Installing Service Worker');
 
@@ -33,7 +32,7 @@ async function installServiceWorker() {
 self.addEventListener('activate', () => activateSW());
 
 
-let indexedDB;
+
 
 async function activateSW() {
 
@@ -47,22 +46,7 @@ async function activateSW() {
         }
     });
 
-    await clients.claim();
-
-    if (!('indexedDB' in self)) {
-        return null;
-    }
-
-    log('Initializing IndexedDB...');
-
-    indexedDB = idb.open('coursesDB', 1, upgradeDB => {
-
-        log('IndexedDB lessonsStore created...');
-
-        upgradeDB.createObjectStore('lessonsStore', { keyPath: "id"});
-    });
-
-    return indexedDB;
+    return clients.claim();
 }
 
 
@@ -86,44 +70,12 @@ async function handleAPIRequest(event) {
 
         const response = await fetch(event.request);
 
-        await saveLessonsToIndexedDB(response.clone());
-
         return response;
     }
     catch (error) {
 
-        console.error("API call failed, reading from IndexedDB", error);
-
-        return readLessonsFromIndexedDB();
+        console.error("API call failed", error);
     }
-}
-
-async function saveLessonsToIndexedDB(response) {
-
-    const json = await response.json();
-
-    const db = await indexedDB;
-
-    const tx = db.transaction('lessonsStore', 'readwrite');
-
-    log("API call successful, saving lessons in IndexedDB", json.lessons);
-
-    json.lessons.forEach(lesson => tx.objectStore('lessonsStore').put(lesson) );
-
-    return tx.complete;
-
-}
-
-
-async function readLessonsFromIndexedDB() {
-
-    const db = await indexedDB;
-
-    const tx = db.transaction('lessonsStore', 'readonly');
-
-    const lessons = await tx.objectStore('lessonsStore').getAll();
-
-    return new Response(JSON.stringify({lessons}));
 }
 
 
