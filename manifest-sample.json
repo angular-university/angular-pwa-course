@@ -1,0 +1,57 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Angular PWA Course",
+  "scope": "/",
+  "display": "fullscreen",
+  "start_url": "http://localhost:8080/",
+  "short_name": "Angular PWA Course",
+  "theme_color": "transparent",
+  "description": "Learn and Keep Up With The Angular Ecosystem",
+  "orientation": "any",
+  "background_color": "transparent",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32"
+    },
+    {
+      "src": "/assets/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "density": "0.75"
+    },
+    {
+      "src": "/assets/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image.png",
+      "density": "1.0"
+    },
+    {
+      "src": "/assets/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": "1.5"
+    },
+    {
+      "src": "/assets/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": "2.0"
+    },
+    {
+      "src": "/assets/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.0"
+    },
+    {
+      "src": "/assets/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": "4.0"
+    }
+  ]
+}
