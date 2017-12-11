@@ -11,26 +11,15 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AppComponent  implements OnInit {
 
 
-    constructor(private swUpdate:SwUpdate, private snackBar: MatSnackBar) {
+    constructor() {
 
     }
 
     ngOnInit() {
 
-        this.swUpdate.checkForUpdate();
 
-        this.swUpdate.available.subscribe(() => {
-
-            console.log("New Version available...");
-
-            const snackRef = this.snackBar.open("New Version Available!", "Click To Use New Version");
-
-            snackRef.onAction().subscribe(() => window.location.reload());
-
-        });
 
     }
-
 
 }
 
