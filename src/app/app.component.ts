@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {SwUpdate} from "@angular/service-worker";
+import {SwPush, SwUpdate} from "@angular/service-worker";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
