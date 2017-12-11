@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, Provider} from '@angular/core';
-import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {LessonsComponent} from './lessons/lessons.component';
@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 import {Router, RouterModule} from "@angular/router";
 
+import {environment} from '../environments/environment.prod';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
@@ -33,7 +35,8 @@ import 'rxjs/add/observable/of';
         BrowserModule,
         HttpClientModule,
         RouterModule.forRoot(routesConfig),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [
         LessonsService
