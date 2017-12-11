@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {SwUpdate} from "@angular/service-worker";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,13 @@ import {Observable} from "rxjs/Observable";
 export class AppComponent  implements OnInit {
 
 
-    constructor() {
+    constructor(private swUpdate:SwUpdate) {
 
     }
 
     ngOnInit() {
+
+        this.swUpdate.checkForUpdate();
 
     }
 
