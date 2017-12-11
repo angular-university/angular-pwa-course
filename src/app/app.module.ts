@@ -13,6 +13,7 @@ import {Router, RouterModule} from "@angular/router";
 
 import {environment} from '../environments/environment.prod';
 import {ServiceWorkerModule} from '@angular/service-worker';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
@@ -22,6 +23,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/observable/of';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -34,7 +36,9 @@ import 'rxjs/add/observable/of';
     imports: [
         BrowserModule,
         HttpClientModule,
+        BrowserAnimationsModule,
         RouterModule.forRoot(routesConfig),
+        MatSnackBarModule,
         ReactiveFormsModule,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
