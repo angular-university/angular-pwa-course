@@ -35,7 +35,9 @@ import {AppRoutingModule} from "./app-routing.module";
         HttpClientModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+
     ],
     providers: [
         LessonsService
