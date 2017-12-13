@@ -10,7 +10,6 @@ import {ReactiveFormsModule} from "@angular/forms";
 
 import {environment} from '../environments/environment.prod';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
@@ -36,7 +35,6 @@ import {AppRoutingModule} from "./app-routing.module";
         HttpClientModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        MatSnackBarModule,
         ReactiveFormsModule
     ],
     providers: [
