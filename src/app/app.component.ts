@@ -17,7 +17,7 @@ export class AppComponent  implements OnInit {
 
     ngOnInit() {
 
-        this.swUpdate.checkForUpdate();
+        //this.swUpdate.checkForUpdate();
 
         this.swUpdate.available.subscribe(() => {
 
