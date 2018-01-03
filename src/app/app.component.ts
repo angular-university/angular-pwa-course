@@ -17,17 +17,16 @@ export class AppComponent  implements OnInit {
 
     ngOnInit() {
 
-        //this.swUpdate.checkForUpdate();
+        if (this.swUpdate.isEnabled) {
 
-        this.swUpdate.available.subscribe(() => {
+            this.swUpdate.available.subscribe(() => {
 
-            if(confirm("New version available. Load New Version?")) {
+                if(confirm("New version available. Load New Version?")) {
 
-                window.location.reload();
-
-            }
-
-        });
+                    window.location.reload();
+                }
+            });
+        }
 
     }
 
