@@ -7,6 +7,7 @@
     "start": "ng serve --proxy-config ./proxy.json --live-reload false",
     "server": "./node_modules/.bin/ts-node ./server/server.ts",
     "build": "ng build",
+    "start:prod": "ng build --prod && cd dist && http-server -c-1 -P http://localhost:9000 .",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
