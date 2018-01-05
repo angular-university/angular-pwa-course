@@ -34,7 +34,8 @@
     "cookie-parser": "^1.4.3",
     "http-server": "^0.10.0",
     "moment": "^2.18.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "@angular/platform-server": "^5.1.2"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.0",

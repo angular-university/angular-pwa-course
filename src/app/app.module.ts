@@ -31,7 +31,7 @@ import {AppRoutingModule} from "./app-routing.module";
         LessonsComponent
     ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         HttpClientModule,
         BrowserAnimationsModule,
         AppRoutingModule,
