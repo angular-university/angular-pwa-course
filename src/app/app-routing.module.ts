@@ -7,11 +7,6 @@ import {LessonsComponent} from "./lessons/lessons.component";
     {
         path: '',
         component: LessonsComponent
-    },
-    {
-        path: '**',
-        redirectTo: '/',
-        pathMatch: 'full'
     }
 ];
 
