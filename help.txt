@@ -1,0 +1,3 @@
+
+
+In order to trigger again the Allow Notifications popup, we need to clear localhost from this list - chrome://settings/content/notifications

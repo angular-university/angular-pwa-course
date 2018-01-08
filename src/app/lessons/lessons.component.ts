@@ -26,6 +26,13 @@ export class LessonsComponent implements OnInit {
 
     ngOnInit() {
         this.loadLessons();
+
+
+        this.swPush.messages.subscribe(message => {
+
+            console.log("Received Web Push Message: " + message);
+
+        });
     }
 
 
@@ -45,7 +52,7 @@ export class LessonsComponent implements OnInit {
             // Passing subscription object to our backend
             this.newsletterService.addPushSubscriber(sub)
                 .subscribe(
-                    () => console.log('Sent push subscription object to server: '),
+                    () => console.log('Sent push subscription object to server.'),
                     err =>  console.log('Could not send subscription object to server, reason: ', err)
                 );
         })
@@ -59,7 +66,6 @@ export class LessonsComponent implements OnInit {
         console.log("Sending Newsletter to all Subscribers ...");
 
         this.newsletterService.send().subscribe();
-
 
     }
 
