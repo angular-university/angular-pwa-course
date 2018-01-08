@@ -8,6 +8,7 @@
     "server": "./node_modules/.bin/ts-node ./server/server.ts",
     "build": "ng build",
     "start:prod": "ng build --prod && cd dist && http-server -c-1 -P http://localhost:9000 .",
+    "gen-vapid-keys": "node ./gen-vapid-keys.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -22,20 +23,21 @@
     "@angular/http": "^5.1.2",
     "@angular/platform-browser": "^5.1.2",
     "@angular/platform-browser-dynamic": "^5.1.2",
+    "@angular/platform-server": "^5.1.2",
     "@angular/router": "^5.1.2",
     "@angular/service-worker": "^5.1.2",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14",
     "@types/express": "^4.0.36",
     "@types/lodash": "^4.14.70",
     "body-parser": "^1.17.2",
     "command-line-args": "^4.0.6",
     "cookie-parser": "^1.4.3",
+    "core-js": "^2.4.1",
     "http-server": "^0.10.0",
     "moment": "^2.18.1",
     "nodemon": "^1.11.0",
-    "@angular/platform-server": "^5.1.2"
+    "rxjs": "^5.5.2",
+    "web-push": "^3.2.5",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.0",
