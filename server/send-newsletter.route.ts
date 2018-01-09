@@ -9,25 +9,19 @@ export function sendNewsletter(req, res) {
     console.log('All Newsletter subscriptions', JSON.stringify(USER_SUBSCRIPTIONS));
 
     const notificationPayload = {
-        notification: {
-            title: "Angular News",
-            body: 'Newsletter Available!',
-            icon: 'assets/main-page-logo-small-hat.png',
-            vibrate: [100, 50, 100],
-            data: {
-                dateOfArrival: Date.now(),
-                primaryKey: '-push-notification'
+        "notification": {
+            "title": "Angular News",
+            "body": "Newsletter Available!",
+            "icon": "assets/main-page-logo-small-hat.png",
+            "vibrate": [100, 50, 100],
+            "data": {
+                "dateOfArrival": 1515496004613,
+                "primaryKey": 1
             },
-            actions: [
-                {
-                    action: 'explore',
-                    title: 'Go to the site'
-                },
-                {
-                    action: 'close',
-                    title: 'Close the notification'
-                },
-            ]
+            "actions": [{
+                "action": "explore",
+                "title": "Go to the site"
+            }]
         }
     };
 
