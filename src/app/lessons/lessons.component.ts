@@ -15,6 +15,8 @@ export class LessonsComponent implements OnInit {
     lessons$: Observable<Lesson[]>;
     isLoggedIn$: Observable<boolean>;
 
+    sub: PushSubscription;
+
     readonly VAPID_PUBLIC_KEY = "BIvC8I6yoFc-DZNgFTANsy9cae80mjWzTym7aB5zY45vBVZQK9VureFHvoh5ijW8EKG2I-g1YaN5rcKe_5AYrvM";
 
     constructor(
@@ -30,7 +32,7 @@ export class LessonsComponent implements OnInit {
 
         this.swPush.messages.subscribe(message => {
 
-            console.log("Received Web Push Message: " + message);
+            console.log("Received Web Push Message: ", message);
 
         });
     }
@@ -47,6 +49,7 @@ export class LessonsComponent implements OnInit {
         })
         .then(sub => {
 
+            this.sub = sub;
             console.log("Notification Subscription: ", sub);
 
             // Passing subscription object to our backend
