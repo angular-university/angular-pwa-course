@@ -15,26 +15,16 @@ export class LessonsComponent implements OnInit {
     lessons$: Observable<Lesson[]>;
     isLoggedIn$: Observable<boolean>;
 
-    sub: PushSubscription;
-
-    readonly VAPID_PUBLIC_KEY = "BIvC8I6yoFc-DZNgFTANsy9cae80mjWzTym7aB5zY45vBVZQK9VureFHvoh5ijW8EKG2I-g1YaN5rcKe_5AYrvM";
+    readonly VAPID_PUBLIC_KEY = "TODO";
 
     constructor(
         private lessonsService: LessonsService,
-        private swPush: SwPush,
         private newsletterService: NewsletterService) {
 
     }
 
     ngOnInit() {
         this.loadLessons();
-
-
-        this.swPush.messages.subscribe(message => {
-
-            console.log("Received Web Push Message: ", message);
-
-        });
     }
 
 
@@ -44,31 +34,13 @@ export class LessonsComponent implements OnInit {
 
     subscribeToNotifications() {
 
-        this.swPush.requestSubscription({
-            serverPublicKey: this.VAPID_PUBLIC_KEY
-        })
-        .then(sub => {
 
-            this.sub = sub;
-            console.log("Notification Subscription: ", sub);
-
-            // Passing subscription object to our backend
-            this.newsletterService.addPushSubscriber(sub)
-                .subscribe(
-                    () => console.log('Sent push subscription object to server.'),
-                    err =>  console.log('Could not send subscription object to server, reason: ', err)
-                );
-        })
-        .catch(err => console.error("Could not subscribe to notifications", err));
 
     }
 
 
     sendNewsletter() {
 
-        console.log("Sending Newsletter to all Subscribers ...");
-
-        this.newsletterService.send().subscribe();
 
     }
 

@@ -6,7 +6,10 @@ const webpush = require('web-push');
 export function sendNewsletter(req, res) {
 
     console.log('Total subscriptions', USER_SUBSCRIPTIONS.length);
-    console.log('All Newsletter subscriptions', JSON.stringify(USER_SUBSCRIPTIONS));
+
+
+    // sample notification payload
+/*
 
     const notificationPayload = {
         "notification": {
@@ -25,13 +28,10 @@ export function sendNewsletter(req, res) {
         }
     };
 
-    Promise.all(USER_SUBSCRIPTIONS.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-        .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-        .catch(err => {
-            console.error("Error sending notification, reason: ", err);
-            res.sendStatus(500);
-        });
 
+    */
+
+    //TODO
 
 }
 
