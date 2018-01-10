@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const webpush = require('web-push');
 
+// TODO replace these keys
 const vapidKeys = {
     publicKey: "BIvC8I6yoFc-DZNgFTANsy9cae80mjWzTym7aB5zY45vBVZQK9VureFHvoh5ijW8EKG2I-g1YaN5rcKe_5AYrvM",
     privateKey: "Xox-dZU4rnLLkRlE5EzblVUrI3LbYj3a719F0a87UWI"
