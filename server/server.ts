@@ -9,14 +9,10 @@ const bodyParser = require('body-parser');
 const webpush = require('web-push');
 
 const vapidKeys = {
-    publicKey: "TODO",
-    privateKey: "TODO"
+    "publicKey":"BLnVk1MBGFBW4UxL44fuoM2xxQ4o9CuxocVzKn9UVmnXZEyPCTEFjI4sALMB8qN5ee67yZ6MeQWjd5iyS8lINAg",
+    "privateKey":"mp5xYHWtRTyCA63nZMvmJ_qmYO6A1klSotcoppSx-MI"
 };
 
-
-/*
-
-   TODO - uncomment after generating your VAPID key
 
 webpush.setVapidDetails(
     'mailto:example@yourdomain.org',
@@ -24,7 +20,7 @@ webpush.setVapidDetails(
     vapidKeys.privateKey
 );
 
-*/
+
 
 
 const app: Application = express();

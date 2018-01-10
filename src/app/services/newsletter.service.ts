@@ -17,7 +17,7 @@ export class NewsletterService {
     }
 
     send() {
-
+        return this.http.post('/api/newsletter', null);
     }
 
 }
