@@ -13,11 +13,18 @@ const vapidKeys = {
     privateKey: "TODO"
 };
 
+
+/*
+
+   TODO - uncomment after generating your VAPID key
+
 webpush.setVapidDetails(
     'mailto:example@yourdomain.org',
     vapidKeys.publicKey,
     vapidKeys.privateKey
 );
+
+*/
 
 
 const app: Application = express();
