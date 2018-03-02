@@ -24,3 +24,9 @@ main {
 .pwa-logo {
     height: 140px;
 }
+
+
+::ng-deep body {
+    background: white;
+}
+

@@ -1,7 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+tmp.html
+
 # compiled output
 /dist
+/dist-server
 /tmp
 /out-tsc
 

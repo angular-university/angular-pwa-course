@@ -2,3 +2,9 @@
 h2 {
     text-align: center;
 }
+
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
