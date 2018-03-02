@@ -47,7 +47,7 @@ NPM 5 or above has the big advantage that if you use it you will be installing t
 
 This should take a couple of minutes. If there are issues, please post the complete error message in the Questions section of the course.
 
-# To Run the Development Backend Server
+#  Running the Development Backend Server
 
 We can start the sample application backend with the following command:
 
@@ -55,7 +55,7 @@ We can start the sample application backend with the following command:
 
 This is a small Node REST API server.
 
-# To run the Development UI Server
+# Running the Development UI Server
 
 To run the frontend part of our code, we will use the Angular CLI:
 
@@ -97,11 +97,11 @@ At certain points along the course, you will be asked to checkout other remote b
 
     git branch -a
 
-  The remote branches have their starting in origin, such as for example section-1.
+  The remote branches have their starting in origin, such as for example 1-notifications.
 
 We can checkout the remote branch and start tracking it with a local branch that has the same name, by using the following command:
 
-      git checkout -b section-1 origin/section-1
+      git checkout -b 1-notifications origin/1-notifications
 
 It's also possible to download a ZIP file for a given branch,  using the branch dropdown on this page on the top left, and then selecting the Clone or Download / Download as ZIP button.
 
