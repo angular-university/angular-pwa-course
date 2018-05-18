@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-security-course": {
+    "angular-pwa-course": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -48,18 +48,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-security-course:build"
+            "browserTarget": "angular-pwa-course:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-security-course:build:production"
+              "browserTarget": "angular-pwa-course:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-security-course:build"
+            "browserTarget": "angular-pwa-course:build"
           }
         },
         "test": {
@@ -91,7 +91,7 @@
         }
       }
     },
-    "angular-security-course-e2e": {
+    "angular-pwa-course-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -100,7 +100,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-security-course:serve"
+            "devServerTarget": "angular-pwa-course:serve"
           }
         },
         "lint": {
@@ -115,7 +115,7 @@
       }
     }
   },
-  "defaultProject": "angular-security-course",
+  "defaultProject": "angular-pwa-course",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "",
