@@ -42,7 +42,7 @@ app.route('/api/newsletter')
 
 
 // launch an HTTP Server
-const httpServer = app.listen(9000, () => {
+const httpServer:any = app.listen(9000, () => {
     console.log("HTTP Server running at http://localhost:" + httpServer.address().port);
 });
 
