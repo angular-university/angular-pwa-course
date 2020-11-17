@@ -3,11 +3,6 @@
 
 This repository contains the code of the [Angular PWA Course - Build the future of the Web Today](https://angular-university.io/course/angular-pwa-course).
 
-This course repository is updated to Angular 10, and there is a  package-lock.json file available, for avoiding semantic versioning installation issues.
-
-![Angular PWA Course - Build the future of the Web Today](https://s3-us-west-1.amazonaws.com/angular-university/course-images/angular-pwa-course.png)
-
-
 # Installation pre-requisites
 
 IMPORTANT: Please use NPM 5 or above, to make sure the package-lock.json is used.
