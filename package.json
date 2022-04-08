@@ -31,7 +31,7 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "http-server": "^0.10.0",
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "nodemon": "^1.19.1",
     "rxjs": "^6.6.0",
     "tslib": "^1.10.0",
