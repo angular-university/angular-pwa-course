@@ -11,9 +11,8 @@ import {catchError} from 'rxjs/operators';
     styleUrls: ['./lessons.component.css']
 })
 export class LessonsComponent implements OnInit {
-
-    lessons$: Observable<Lesson[]>;
-    isLoggedIn$: Observable<boolean>;
+    lessons$: Observable<Lesson[]> | undefined;
+    isLoggedIn$: Observable<boolean> | undefined;
 
     constructor(private lessonsService: LessonsService) {
 
