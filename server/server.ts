@@ -1,6 +1,7 @@
 
 import * as express from 'express';
 import {Application} from "express";
+import {AddressInfo} from "net";
 import {readAllLessons} from "./read-all-lessons.route";
 import {addPushSubscriber} from "./add-push-subscriber.route";
 import {sendNewsletter} from "./send-newsletter.route";
@@ -43,7 +44,8 @@ app.route('/api/newsletter')
 
 // launch an HTTP Server
 const httpServer = app.listen(9000, () => {
-    console.log("HTTP Server running at http://localhost:" + httpServer.address().port);
+    const address = httpServer.address() as AddressInfo;
+    console.log("HTTP Server running at http://localhost:" + address.port);
 });
 
 
